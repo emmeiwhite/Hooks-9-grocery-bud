@@ -1,0 +1,27 @@
+.main-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-grocery {
+  width: 500px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+}
+.main-grocery h3 {
+  text-align: center;
+}
+.grocery-item,
+.main-form {
+  display: flex;
+  justify-content: space-between;
+}
+#grocery-name {
+  flex: 1;
+}
+.error-message {
+  color: red;
+  font-size: 0.75rem;
+}
