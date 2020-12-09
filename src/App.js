@@ -9,6 +9,7 @@ function App() {
   const [searchItem, setSearchItem] = useState("");
   const [isError, setIsError] = useState(false);
   const [isItemAdded, setIsItemAdded] = useState(false);
+  const [isCleared, setIsCleared] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ function App() {
   const handleChange = (e) => {
     setSearchItem(e.target.value);
     setIsItemAdded(false);
+    setIsCleared(false);
   };
 
   const handleEditClick = (e) => {
@@ -40,15 +42,18 @@ function App() {
 
   const handleClearItems = (e) => {
     setListItems([]);
+    setIsCleared(true);
   };
   return (
     <>
       <main className="main-wrapper">
         <section className="main-grocery">
-          {isItemAdded && !isError ? (
+          {isItemAdded && !isError && !isCleared && (
             <div className="success-message">Item Added Successfully</div>
-          ) : (
-            ""
+          )}
+
+          {isCleared && (
+            <div className="success-message">Item Removed Successfully</div>
           )}
           <h3 className="grocery-heading">Grocery List</h3>
           <form className="main-form" onSubmit={handleSubmit}>
@@ -83,9 +88,11 @@ function App() {
               ))}
           </ul>
 
-          <div className="clear-items" onClick={handleClearItems}>
-            Clear Items
-          </div>
+          {listItems.length > 0 && (
+            <div className="clear-items" onClick={handleClearItems}>
+              Clear Items
+            </div>
+          )}
         </section>
       </main>
     </>
