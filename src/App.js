@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import List from "./components/list/List";
 import Alert from "./components/alert/Alert";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -11,6 +11,7 @@ function App() {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [isCleared, setIsCleared] = useState(false);
   const [isItemDeleted, setItemDeleted] = useState(false);
+  const inputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,8 +35,11 @@ function App() {
     setItemDeleted(false);
   };
 
-  const handleEditClick = (e) => {
-    console.log(e.target);
+  const handleEditClick = (id) => {
+    const itemObj = listItems.find((item) => item.id == id);
+    handleDeleteClick(id);
+    console.log(itemObj);
+    inputRef.current.focus();
   };
 
   const handleDeleteClick = (id) => {
@@ -74,6 +78,7 @@ function App() {
               id="grocery-name"
               onChange={handleChange}
               value={searchItem}
+              ref={inputRef}
             />
             <button type="submit">Add Item</button>
           </form>
@@ -90,7 +95,10 @@ function App() {
                 <li className="grocery-item" key={item.id}>
                   <span>{item.item}</span>{" "}
                   <div>
-                    <FaEdit className="edit-icon" onClick={handleEditClick} />
+                    <FaEdit
+                      className="edit-icon"
+                      onClick={() => handleEditClick(item.id)}
+                    />
                     <FaTrash
                       className="delete-icon"
                       onClick={() => handleDeleteClick(item.id)}
