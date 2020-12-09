@@ -37,6 +37,10 @@ function App() {
   const handleDeleteClick = (e) => {
     console.log(e.target);
   };
+
+  const handleClearItems = (e) => {
+    setListItems([]);
+  };
   return (
     <>
       <main className="main-wrapper">
@@ -46,7 +50,7 @@ function App() {
           ) : (
             ""
           )}
-          <h3>Grocery List</h3>
+          <h3 className="grocery-heading">Grocery List</h3>
           <form className="main-form" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -78,6 +82,10 @@ function App() {
                 </li>
               ))}
           </ul>
+
+          <div className="clear-items" onClick={handleClearItems}>
+            Clear Items
+          </div>
         </section>
       </main>
     </>

@@ -10,13 +10,17 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   padding: 1.5rem;
 }
-.main-grocery h3 {
+.grocery-heading {
   text-align: center;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 1rem 0;
 }
 .grocery-item,
 .main-form {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
 
 #grocery-name,
@@ -60,4 +64,15 @@ button[type="submit"] {
 }
 .delete-icon {
   color: red;
+}
+.clear-items {
+  text-align: center;
+  color: red;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease-in;
+}
+
+.clear-items:hover {
+  color: rgb(126, 0, 0);
 }
