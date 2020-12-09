@@ -10,6 +10,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [isCleared, setIsCleared] = useState(false);
+  const [isItemDeleted, setItemDeleted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,14 +31,18 @@ function App() {
     setSearchItem(e.target.value);
     setIsItemAdded(false);
     setIsCleared(false);
+    setItemDeleted(false);
   };
 
   const handleEditClick = (e) => {
     console.log(e.target);
   };
 
-  const handleDeleteClick = (e) => {
-    console.log(e.target);
+  const handleDeleteClick = (id) => {
+    const updatedLists = listItems.filter((item) => item.id != id);
+    setListItems(updatedLists);
+    setIsItemAdded(false);
+    setItemDeleted(true);
   };
 
   const handleClearItems = (e) => {
@@ -53,8 +58,15 @@ function App() {
           )}
 
           {isCleared && (
+            <div className="success-message">
+              All Items Removed Successfully
+            </div>
+          )}
+
+          {isItemDeleted && (
             <div className="success-message">Item Removed Successfully</div>
           )}
+
           <h3 className="grocery-heading">Grocery List</h3>
           <form className="main-form" onSubmit={handleSubmit}>
             <input
@@ -81,7 +93,7 @@ function App() {
                     <FaEdit className="edit-icon" onClick={handleEditClick} />
                     <FaTrash
                       className="delete-icon"
-                      onClick={handleDeleteClick}
+                      onClick={() => handleDeleteClick(item.id)}
                     />
                   </div>
                 </li>
