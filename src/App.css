@@ -18,10 +18,46 @@
   display: flex;
   justify-content: space-between;
 }
+
+#grocery-name,
+button[type="submit"] {
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+}
+
 #grocery-name {
   flex: 1;
+  background-color: whitesmoke;
+}
+button[type="submit"] {
+  background-color: yellowgreen;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.success-message {
+  background-color: rgb(226, 255, 167);
+  padding: 0.3rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+.grocery-item {
+  margin: 1rem 0;
 }
 .error-message {
   color: red;
   font-size: 0.75rem;
+}
+
+.edit-icon,
+.delete-icon {
+  cursor: pointer;
+}
+.edit-icon {
+  margin: 0 0.5rem;
+  color: greenyellow;
+}
+.delete-icon {
+  color: red;
 }
