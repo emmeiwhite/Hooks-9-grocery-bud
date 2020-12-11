@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   const [listItems, setListItems] = useState([]);
   const [searchItem, setSearchItem] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
   const [editId, setEditId] = useState(null);
 
   const inputRef = useRef(null);
@@ -53,6 +53,7 @@ function App() {
       <main className="main-wrapper">
         <section className="main-grocery">
           <h3 className="grocery-heading">Grocery List</h3>
+          {alert.show && <Alert />}
           <form className="main-form" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -60,35 +61,17 @@ function App() {
               onChange={handleChange}
               value={searchItem}
               ref={inputRef}
+              placeholder="e.g. eggs"
             />
-            <button type="submit">Add Item</button>
+            <button type="submit">{isEditing ? "Edit" : "Submit"}</button>
           </form>
-
           {/* --- LIST --- */}
-          <ul>
-            {listItems.length > 0 &&
-              listItems.map((item) => (
-                <li className="grocery-item" key={item.id}>
-                  <span>{item.item}</span>{" "}
-                  <div>
-                    <FaEdit
-                      className="edit-icon"
-                      onClick={() => handleEditClick(item.id)}
-                    />
-                    <FaTrash
-                      className="delete-icon"
-                      onClick={() => handleDeleteClick(item.id)}
-                    />
-                  </div>
-                </li>
-              ))}
-          </ul>
-
-          {listItems.length > 0 && (
-            <div className="clear-items" onClick={handleClearItems}>
-              Clear Items
-            </div>
-          )}
+          <List
+            listItems={listItems}
+            handleEditClick={handleEditClick}
+            handleDeleteClick={handleDeleteClick}
+            handleClearItems={handleClearItems}
+          />
         </section>
       </main>
     </>
