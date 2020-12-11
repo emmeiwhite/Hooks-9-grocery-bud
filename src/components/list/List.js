@@ -26,12 +26,6 @@ const List = ({
             </li>
           ))}
       </ul>
-
-      {listItems.length > 0 && (
-        <div className="clear-items" onClick={handleClearItems}>
-          Clear Items
-        </div>
-      )}
     </section>
   );
 };

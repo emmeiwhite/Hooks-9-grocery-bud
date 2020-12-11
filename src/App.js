@@ -6,8 +6,8 @@ import "./App.css";
 
 function App() {
   const [listItems, setListItems] = useState([]);
-  const [searchItem, setSearchItem] = useState("");
-  const [isEditing, setIsEditing] = useState(true);
+  const [item, setItem] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
 
   const inputRef = useRef(null);
@@ -19,18 +19,17 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (searchItem) {
-      const item = { item: searchItem, id: new Date().getTime().toString() };
 
-      setListItems([...listItems, item]);
-      setSearchItem("");
+    if (!item) {
+      // display alert
+    } else if (item && isEditing) {
+      // deal with edit
     } else {
-      return;
-    }
-  };
+      const listItem = { item, id: new Date().getTime().toString() };
 
-  const handleChange = (e) => {
-    setSearchItem(e.target.value);
+      setListItems([...listItems, listItem]);
+      setItem("");
+    }
   };
 
   const handleEditClick = (id) => {
@@ -58,8 +57,8 @@ function App() {
             <input
               type="text"
               id="grocery-name"
-              onChange={handleChange}
-              value={searchItem}
+              onChange={(e) => setItem(e.target.value)}
+              value={item}
               ref={inputRef}
               placeholder="e.g. eggs"
             />
@@ -70,8 +69,13 @@ function App() {
             listItems={listItems}
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
-            handleClearItems={handleClearItems}
           />
+
+          {listItems.length > 0 && (
+            <div className="clear-items" onClick={handleClearItems}>
+              Clear Items
+            </div>
+          )}
         </section>
       </main>
     </>
