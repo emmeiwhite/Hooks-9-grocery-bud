@@ -1,13 +1,14 @@
 .alert {
   width: 100%;
   text-align: center;
-  font-weight: 500;
+  color: #fff;
+  border-radius: 0.5rem;
 }
 
-.alert.success {
-  background-color: greenyellow;
+.alert-success {
+  background-color: rgb(88, 133, 20);
 }
 
-.alert.danger {
-  background-color: red;
+.alert-danger {
+  background-color: rgb(255, 120, 66);
 }

@@ -11,6 +11,7 @@ function App() {
   const [editId, setEditId] = useState(null);
 
   const inputRef = useRef(null);
+
   const [alert, setAlert] = useState({
     show: false,
     msg: "",
@@ -21,7 +22,7 @@ function App() {
     e.preventDefault();
 
     if (!item) {
-      // display alert
+      showAlert(true, "danger", "Enter a value");
     } else if (item && isEditing) {
       // deal with edit
     } else {
@@ -31,6 +32,18 @@ function App() {
       setItem("");
     }
   };
+
+  /* --- Showing Alert --- */
+  const showAlert = (show = false, type = "", msg = "") => {
+    setAlert({
+      ...alert,
+      show,
+      type,
+      msg,
+    });
+  };
+
+  /* --- End Showing Alert --- */
 
   const handleEditClick = (id) => {
     const itemObj = listItems.find((item) => item.id == id);
@@ -51,8 +64,10 @@ function App() {
     <>
       <main className="main-wrapper">
         <section className="main-grocery">
-          <h3 className="grocery-heading">Grocery List</h3>W{" "}
-          {alert.show && <Alert {...alert} />}
+          {alert.show && <Alert {...alert} disappearingAlert={showAlert} />}
+
+          <h3 className="grocery-heading">Grocery List</h3>
+
           <form className="main-form" onSubmit={handleSubmit}>
             <input
               type="text"
