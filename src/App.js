@@ -30,6 +30,7 @@ function App() {
 
       setListItems([...listItems, listItem]);
       setItem("");
+      showAlert(true, "success", "Item ADDED");
     }
   };
 
