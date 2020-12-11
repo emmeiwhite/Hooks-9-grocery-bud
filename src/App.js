@@ -51,8 +51,8 @@ function App() {
     <>
       <main className="main-wrapper">
         <section className="main-grocery">
-          <h3 className="grocery-heading">Grocery List</h3>
-          {alert.show && <Alert />}
+          <h3 className="grocery-heading">Grocery List</h3>W{" "}
+          {alert.show && <Alert {...alert} />}
           <form className="main-form" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -70,7 +70,6 @@ function App() {
             handleEditClick={handleEditClick}
             handleDeleteClick={handleDeleteClick}
           />
-
           {listItems.length > 0 && (
             <div className="clear-items" onClick={handleClearItems}>
               Clear Items

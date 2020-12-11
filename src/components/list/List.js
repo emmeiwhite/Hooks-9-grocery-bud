@@ -1,11 +1,6 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-const List = ({
-  listItems,
-  handleEditClick,
-  handleDeleteClick,
-  handleClearItems,
-}) => {
+const List = ({ listItems, handleEditClick, handleDeleteClick }) => {
   return (
     <section>
       <ul>

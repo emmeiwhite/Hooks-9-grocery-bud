@@ -1,0 +1,13 @@
+.alert {
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+
+.alert.success {
+  background-color: greenyellow;
+}
+
+.alert.danger {
+  background-color: red;
+}
