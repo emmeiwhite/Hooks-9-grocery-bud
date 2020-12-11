@@ -7,11 +7,15 @@ import "./App.css";
 function App() {
   const [listItems, setListItems] = useState([]);
   const [searchItem, setSearchItem] = useState("");
-  const [isError, setIsError] = useState(false);
-  const [isItemAdded, setIsItemAdded] = useState(false);
-  const [isCleared, setIsCleared] = useState(false);
-  const [isItemDeleted, setItemDeleted] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
+
   const inputRef = useRef(null);
+  const [alert, setAlert] = useState({
+    show: false,
+    msg: "",
+    type: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,20 +23,14 @@ function App() {
       const item = { item: searchItem, id: new Date().getTime().toString() };
 
       setListItems([...listItems, item]);
-      setIsError(false);
       setSearchItem("");
-      setIsItemAdded(true);
     } else {
-      setIsError(true);
       return;
     }
   };
 
   const handleChange = (e) => {
     setSearchItem(e.target.value);
-    setIsItemAdded(false);
-    setIsCleared(false);
-    setItemDeleted(false);
   };
 
   const handleEditClick = (id) => {
@@ -45,32 +43,15 @@ function App() {
   const handleDeleteClick = (id) => {
     const updatedLists = listItems.filter((item) => item.id != id);
     setListItems(updatedLists);
-    setIsItemAdded(false);
-    setItemDeleted(true);
   };
 
   const handleClearItems = (e) => {
     setListItems([]);
-    setIsCleared(true);
   };
   return (
     <>
       <main className="main-wrapper">
         <section className="main-grocery">
-          {isItemAdded && !isError && !isCleared && (
-            <div className="success-message">Item Added Successfully</div>
-          )}
-
-          {isCleared && (
-            <div className="success-message">
-              All Items Removed Successfully
-            </div>
-          )}
-
-          {isItemDeleted && (
-            <div className="success-message">Item Removed Successfully</div>
-          )}
-
           <h3 className="grocery-heading">Grocery List</h3>
           <form className="main-form" onSubmit={handleSubmit}>
             <input
@@ -82,11 +63,6 @@ function App() {
             />
             <button type="submit">Add Item</button>
           </form>
-          {isError ? (
-            <span className="error-message">No Grocery Name Provided</span>
-          ) : (
-            ""
-          )}
 
           {/* --- LIST --- */}
           <ul>
